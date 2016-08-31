@@ -2,7 +2,11 @@ var express=require('express');
 var bodyParser=require('body-parser');
 var app=express();
 var http=require('http').Server(app);
+var db=require('./models/db');
 
+var dbModel=new db();
+
+dbModel.setupDb();
 app.use(bodyParser.json());
 app.use(require('./controllers'));
 

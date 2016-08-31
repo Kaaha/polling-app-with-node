@@ -4,6 +4,7 @@ var async=require('async');
 
 class db {
 	setupDb() {
+		var self=this;
 		async.waterfall([
 			function(callback) {
 				self.connectToRethinkDbServer(function(err,connection) {
@@ -49,14 +50,14 @@ class db {
 	}
 
 	connectToDb(callback) {
-		rethinkdb.connect({
-			host:'localhost',
-			port:28015,
-			db:'polls'
-		},function(err,connection) {
-			callback(err,connection);
-		});
-	}
+    	rethinkdb.connect({
+      		host : 'localhost',
+      		port : 28015,
+      		db : 'polls'
+    	}, function(err,connection) {
+      		callback(err,connection);
+    });
+  }
 }
 
 module.exports=db;
