@@ -7,7 +7,8 @@ class polls {
   addNewPolls(pollData,callback) {
     async.waterfall([
       function(callback) {
-        db.connectToDB(function(err,connection) {
+        var pollObject = new db();
+        pollObject.connectToDB(function(err,connection) {
           if(err) {
             return callback(true,"Error connecting to database");
           }
@@ -34,7 +35,8 @@ class polls {
   votePollOption(pollData,callback) {
     async.waterfall([
       function(callback) {
-        db.connectToDB(function(err,connection) {
+        var pollObject = new db();
+        pollObject.connectToDB(function(err,connection) {
           if(err) {
             return callback(true,"Error connecting to database");
           }
@@ -52,7 +54,7 @@ class polls {
               break;
             }
           }
-          rethinkdb.table('polls').get(pollData.id).update(result).run(connection,function(err,result) {
+          rethinkdb.table('poll').get(pollData.id).update(result).run(connection,function(err,result) {
             connection.close();
             if(err) {
               return callback(true,"Error updating the vote");
@@ -69,7 +71,8 @@ class polls {
   getAllPolls(callback) {
     async.waterfall([
       function(callback) {
-        db.connectToDB(function(err,connection) {
+        var pollObject = new db();
+        pollObject.connectToDB(function(err,connection) {
           if(err) {
             return callback(true,"Error connecting to database");
           }
@@ -86,7 +89,7 @@ class polls {
             if(err) {
               return callback(true,"Error reading cursor");
             }
-            callback(null,result);
+            callback(null,result)
           });
         });
       }

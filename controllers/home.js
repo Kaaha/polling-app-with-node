@@ -1,8 +1,6 @@
 var express=require('express');
 var router=express.Router();
 
-router.get('/',function(req,res) {
-	res.send('<h1>Hello Polling</h1>');
-});
+var app=express();
 
 module.exports=router;
